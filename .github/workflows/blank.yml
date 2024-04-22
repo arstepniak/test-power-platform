@@ -9,6 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
         USERNAME: 'artste@46mb3r.onmicrosoft.com'
+        URL: 'org94d707dc.crm4.dynamics.com'
     steps:
     - name: Install Power Platform Tools
       uses: microsoft/powerplatform-actions/actions-install@v1
@@ -16,7 +17,7 @@ jobs:
     - name: Export Solution
       uses: microsoft/powerplatform-actions/export-solution@v1
       with:
-        environment-url: 'https://myenv.crm.dynamics.com'
+        environment-url: ${{ env.URL }}
         user-name: ${{ env.USERNAME }}
         password-secret: ${{ secrets.DEFAULT_ENV }}
         solution-name: aSolution
@@ -34,8 +35,8 @@ jobs:
     - name: Publish Solution
       uses: microsoft/powerplatform-actions/publish-solution@v1
       with:
-        environment-url: 'https://myenv.crm.dynamics.com'
-        user-name: 'artste@46mb3r.onmicrosoft.com'
+        environment-url: ${{ env.URL }}
+        user-name: ${{ env.USERNAME }}
         password-secret: ${{ secrets.DEFAULT_ENV }}
 
     - name: Prepare solution changes for check-in into source control
